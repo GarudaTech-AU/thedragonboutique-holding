@@ -14,23 +14,77 @@
 <meta property="og:url" content="https://thedragonboutique.com.au/">
 <meta property="og:image" content="https://thedragonboutique.com.au/og.png">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="/base.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
 <style>
-  html, body { height: 100%; margin: 0; background: #FBF8F3; }
-  main { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-sizing: border-box; padding: 6vh 6vw; }
-  img { display: block; width: min(520px, 84vw); height: auto; }
-  p { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(28px, 5vw, 44px); letter-spacing: 0.04em; color: #6B5F9E; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background:
+      radial-gradient(60vmax 45vmax at 12% 18%, rgba(231, 226, 241, 0.75), transparent 70%),
+      radial-gradient(55vmax 40vmax at 90% 85%, rgba(246, 226, 209, 0.7), transparent 70%),
+      radial-gradient(40vmax 30vmax at 85% 10%, rgba(220, 229, 239, 0.6), transparent 70%),
+      #FBF8F3;
+    overflow: hidden;
+  }
+  main { min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-sizing: border-box; padding: 4vh 6vw; }
+  h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  .logo { position: relative; width: min(540px, 86vw, 62vh); aspect-ratio: 900 / 1011; }
+  .logo img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .dragon { position: absolute; inset: 0; animation: fly-in 2.2s cubic-bezier(.22, .8, .3, 1) both, hover 3.6s ease-in-out 2.2s infinite alternate; }
+  .wing-back { transform-origin: 57.56% 36.00%; animation: flap-back 1.5s ease-in-out infinite alternate; }
+  .wing-front { transform-origin: 63.78% 43.03%; animation: flap-front 1.5s ease-in-out infinite alternate; }
+
+  @keyframes fly-in {
+    0%   { transform: translate(46%, -38%) rotate(-10deg) scale(.55); opacity: 0; }
+    35%  { opacity: 1; }
+    100% { transform: translate(0, 0) rotate(0) scale(1); opacity: 1; }
+  }
+  @keyframes hover {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(-1.2%, -2.4%) rotate(-1.5deg); }
+  }
+  @keyframes flap-back  { 0% { transform: rotate(9deg); }  100% { transform: rotate(-7deg); } }
+  @keyframes flap-front { 0% { transform: rotate(-9deg); } 100% { transform: rotate(7deg); } }
+
+  .sparkle { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #E3C27A; box-shadow: 0 0 10px 3px rgba(227, 194, 122, .55); opacity: 0; animation: twinkle 3.2s ease-in-out infinite; }
+  .s1 { left: 74%; top: 12%; animation-delay: 1.6s; }
+  .s2 { left: 92%; top: 40%; animation-delay: 2.4s; width: 6px; height: 6px; }
+  .s3 { left: 30%; top: 8%;  animation-delay: 3.1s; }
+  .s4 { left: 84%; top: 60%; animation-delay: 4.0s; width: 5px; height: 5px; }
+  .s5 { left: 46%; top: 66%; animation-delay: 2.9s; width: 6px; height: 6px; }
+  @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.4); } 50% { opacity: 1; transform: scale(1); } }
+
+  .soon { margin: 0; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; font-size: clamp(30px, 5vw, 46px); letter-spacing: .05em; color: #6B5F9E; animation: rise 1.4s ease-out 1.6s both; }
+  .soon::before, .soon::after { content: ""; display: inline-block; width: 1.4em; height: 1px; background: #C9A24A; vertical-align: middle; margin: 0 .5em; }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dragon, .wing-back, .wing-front, .soon { animation: none; }
+    .sparkle { display: none; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <picture>
-    <source srcset="/logo.webp" type="image/webp">
-    <img src="/logo.png" width="900" height="1011" alt="The Dragon Boutique">
-  </picture>
-  <p>Coming soon</p>
+  <h1>The Dragon Boutique</h1>
+  <div class="logo" role="img" aria-label="The Dragon Boutique logo: a watercolour dragon flying beside a bouquet of roses">
+    <img src="/base.webp" alt="" width="900" height="1011">
+    <div class="dragon" aria-hidden="true">
+      <img class="wing-back" src="/wing-back.webp" alt="" width="900" height="1011">
+      <img src="/dragon-body.webp" alt="" width="900" height="1011">
+      <img class="wing-front" src="/wing-front.webp" alt="" width="900" height="1011">
+    </div>
+    <img src="/frame-front.webp" alt="" width="900" height="1011">
+    <span class="sparkle s1" aria-hidden="true"></span>
+    <span class="sparkle s2" aria-hidden="true"></span>
+    <span class="sparkle s3" aria-hidden="true"></span>
+    <span class="sparkle s4" aria-hidden="true"></span>
+    <span class="sparkle s5" aria-hidden="true"></span>
+  </div>
+  <p class="soon">Coming soon</p>
 </main>
 </body>
 </html>
